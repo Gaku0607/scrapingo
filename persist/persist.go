@@ -1,5 +1,7 @@
 package persist
 
+import "fmt"
+
 const (
 	SQL      = "sql"
 	JSONFILE = "jsonfile"
@@ -25,6 +27,6 @@ func NewPersistStore(format string, Options *PersistOptions) (Persist, error) {
 	case REDIS:
 		return newRedis(Options)
 	default:
-		return &NilPersist{}, nil
+		return nil, fmt.Errorf("unknow format %s", format)
 	}
 }
